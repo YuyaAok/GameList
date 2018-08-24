@@ -1,0 +1,59 @@
+
+
+<table style="table-layout:fixed;" border="1">
+	<tr>
+		<th>ゲームID</th>
+		<th>ゲームタイトル</th>
+		<th width="100px">記事URL</th>
+		<th>動作メディア</th>
+		<th width="10px">アイコンURL</th>
+		<th>ジャンル</th>
+		<th>リリース日</th>
+		<th>紐付け用ゲームタイトル</th>
+		<th>確認ボタン</th>
+	</tr>
+
+<% @lists.each do |list| %>
+　<%# 確認していた場合は表示しない%>
+	<% if  list.Flag  == 0 %>
+		<tr>
+			<td><%= list.Game_ID %></td>
+			<td><%= list.Game_Title %></td>
+
+			<%# URLを","で区切り、分けて表示
+			　URLをクリックすることでその記事に飛ぶ %>
+			<% article = list.Article_URL %>
+			<td>
+				<% article.split(",").each do |url| %>
+				<li><%= link_to url, url, target:"_blank" %></li>
+				<% end %>
+			</td>
+
+			<%# 動作環境によってメディアの表示を変える %>
+			<% if  list.Media  == 0 %>
+				<td>スマホ</td>
+			<% elsif  list.Media  == 1 %>
+				<td>スマホ</td>
+			<% elsif  list.Media  == 2 %>
+				<td>PC</td>
+			<% end %>
+
+			<%# URLをクリックすることでそのアイコンに飛ぶ %>
+			<td><%= link_to list.Icon_URL, list.Icon_URL, target:"_blank" %></td>
+			<td><%= list.Genre %></td>
+			<td><%= list.Release_Date %></td>
+
+			<%# セレクトボックス %>
+			<%= form_for list, url:'/update' do |f| %>
+			<td>
+					<%= f.collection_select(:id, @games, :id, :Game_title, :include_blank=>"追加なし") %>
+				</td>
+				<td>
+					<%= hidden_field_tag :game_info_title, list.Game_Title %>
+					<%= f.submit "確認"%>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+<% end %>
+</table>
