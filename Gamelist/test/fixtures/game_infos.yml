@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Game_ID: MyText
+  Game_Title: MyText
+  Article_URL: MyText
+  Media: MyText
+  Icon_URL: MyText
+  Genre: MyText
+  Release_Date: 2018-08-21
+  Flag: 1
+
+two:
+  Game_ID: MyText
+  Game_Title: MyText
+  Article_URL: MyText
+  Media: MyText
+  Icon_URL: MyText
+  Genre: MyText
+  Release_Date: 2018-08-21
+  Flag: 1
